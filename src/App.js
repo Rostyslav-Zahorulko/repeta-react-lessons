@@ -1,8 +1,8 @@
-import Counter from './components/Counter';
+import Counter from './components/Counter/Counter';
 
 const App = () => (
   <div>
-    <Counter />
+    <Counter initialValue={10} />
   </div>
 );
 
