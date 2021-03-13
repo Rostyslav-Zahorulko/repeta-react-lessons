@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Controls from '../Controls/Controls';
-import Value from '../Value/Value';
+import Controls from '../Controls';
+import Value from '../Value';
 
 import './Counter.css';
 
@@ -42,7 +42,7 @@ import './Counter.css';
 //     Возвращать функция должна обновленный state
 // Второй аргумент - функция, которая будет вызвана только после обновления state
 
-// Подъем состояния (state hoisting) - https://youtu.be/terXi4NlcoI?t=2783
+// Подъем состояния при композиции (state hoisting) - https://youtu.be/terXi4NlcoI?t=2783
 
 class Counter extends React.Component {
   static defaultProps = {
@@ -78,9 +78,11 @@ class Counter extends React.Component {
   };
 
   render() {
+    const { value } = this.state;
+
     return (
       <div className="Counter">
-        <Value value={this.state.value} />
+        <Value value={value} />
 
         <Controls
           onIncrement={this.handleIncrement}
