@@ -1,4 +1,4 @@
-// https://youtu.be/terXi4NlcoI?t=3365
+// https://youtu.be/terXi4NlcoI?t=3365 (вебинар № 3)
 
 import { Component } from 'react';
 import './Dropdown.css';
