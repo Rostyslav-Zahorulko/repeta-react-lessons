@@ -1,5 +1,3 @@
-// https://youtu.be/2tPxoJxaCes?t=4109 (вебинар № 4 - добавление)
-
 import { Component } from 'react';
 
 import './TodoEditor.scss';

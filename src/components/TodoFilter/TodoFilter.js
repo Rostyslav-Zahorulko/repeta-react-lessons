@@ -1,5 +1,3 @@
-// https://youtu.be/2tPxoJxaCes?t=4750 (вебинар № 4 - фильтрация)
-
 import './TodoFilter.scss';
 
 const TodoFilter = ({ value, onFilterTodos }) => (

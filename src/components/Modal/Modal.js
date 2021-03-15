@@ -13,20 +13,20 @@ const modalRoot = document.querySelector('#modal-root');
 
 class Modal extends Component {
   componentDidMount() {
-    console.log('Modal componentDidMount');
+    // console.log('Modal componentDidMount');
 
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    console.log('Modal componentWillUnmount');
+    // console.log('Modal componentWillUnmount');
 
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   handleKeyDown = event => {
     if (event.code === 'Escape') {
-      console.log('Нажали ESC, нужно закрыть модалку');
+      // console.log('Нажали ESC, нужно закрыть модалку');
 
       this.props.onClose();
     }
@@ -34,7 +34,7 @@ class Modal extends Component {
 
   handleBackdropClick = event => {
     if (event.target === event.currentTarget) {
-      console.log('Кликнули в бэкдроп');
+      // console.log('Кликнули в бэкдроп, нужно закрыть модалку');
 
       this.props.onClose();
     }

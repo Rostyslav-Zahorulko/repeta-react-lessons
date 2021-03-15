@@ -1,5 +1,3 @@
-// https://youtu.be/w6MW1szKuT4?t=4151 - Вынесение заметки в отдельный компонент (вебинар № 5)
-
 import './Todo.scss';
 
 const Todo = ({ text, completed, onDelete, onUpdate }) => {

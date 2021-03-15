@@ -1,8 +1,25 @@
+// https://youtu.be/terXi4NlcoI?t=5467 - Коллекция заметок: создание, удаление (вебинар № 3)
+
+// https://youtu.be/2tPxoJxaCes?t=3719 - Коллекция заметок: добавление, обновление, фильтрация (вебинар № 4)
+// https://youtu.be/2tPxoJxaCes?t=3736 - (обновление)
+// https://youtu.be/2tPxoJxaCes?t=4109 - (добавление)
+// https://youtu.be/2tPxoJxaCes?t=4750 - (фильтрация)
+// https://youtu.be/2tPxoJxaCes?t=5550 - (подведение итогов)
+
+// https://youtu.be/w6MW1szKuT4?t=567  - Сохранение заметок в local storage (вебинар № 5)
+
+// https://youtu.be/w6MW1szKuT4?t=4129 - Рефакторинг заметок (вебинар № 5)
+// https://youtu.be/w6MW1szKuT4?t=4151 - (вынесение заметки в отдельный компонент)
+// https://youtu.be/w6MW1szKuT4?t=4446 - (добавление кнопки-иконки)
+// https://youtu.be/w6MW1szKuT4?t=4906 - ()
+
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
 import Container from './components/Container';
-// import Modal from './components/Modal';
+import Modal from './components/Modal';
+import IconButton from './components/IconButton';
+import { ReactComponent as AddIcon } from './icons/add.svg';
 // import Counter from './components/Counter';
 // import Dropdown from './components/Dropdown';
 // import ColorPicker from './components/ColorPicker';
@@ -21,7 +38,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // console.log('App componentDidMount');
+    console.log('App componentDidMount');
 
     const todos = localStorage.getItem('todos');
     // console.log('todos: ', todos);
@@ -35,13 +52,24 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log('App componentDidUpdate');
+    console.log('App componentDidUpdate');
+    // console.log(prevState.todos);
+    // console.log(this.state.todos);
 
-    if (prevState.todos !== this.state.todos) {
+    const prevTodos = prevState.todos;
+    const nextTodos = this.state.todos;
+
+    if (nextTodos !== prevTodos) {
       // console.log('Изменились todos');
 
-      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+      localStorage.setItem('todos', JSON.stringify(nextTodos));
     }
+
+    if (nextTodos.length > prevTodos.length && prevTodos.length !== 0) {
+      this.toggleModal();
+    }
+    // Это не сработает, если удалить все todos, а потом добавить 1 новую
+    // (если в local storage лежит пустой массив todos)
   }
 
   // formSubmitHandler = data => {
@@ -58,6 +86,8 @@ class App extends Component {
     this.setState(({ todos }) => ({
       todos: [todo, ...todos],
     }));
+
+    // this.toggleModal();
   };
 
   deleteTodo = todoId => {
@@ -116,28 +146,15 @@ class App extends Component {
           Открыть модалку
         </button> */}
 
-        {/* {showModal && (
+        <IconButton onClick={this.toggleModal} aria-label="Добавить todo">
+          <AddIcon width="32" height="32" fill="#fff" />
+        </IconButton>
+
+        {showModal && (
           <Modal onClose={this.toggleModal}>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-              mollitia fuga, assumenda perferendis ratione nisi voluptate
-              delectus aliquam reprehenderit atque, blanditiis provident quasi
-              adipisci, sunt necessitatibus ducimus repudiandae culpa quos
-              cumque labore inventore eligendi cum? Doloribus obcaecati sapiente
-              dolorem tempore perferendis mollitia vel facilis suscipit
-              architecto a doloremque impedit dolore adipisci, facere possimus
-              porro explicabo assumenda! Officia minima aliquam illo? Cum ipsa,
-              nobis incidunt, itaque reprehenderit doloribus dolorum nemo sit
-              quod doloremque exercitationem quam aut, necessitatibus distinctio
-              ratione aperiam. Recusandae, beatae! Aliquam, beatae nam
-              voluptatum magni esse officia sapiente et saepe neque
-              exercitationem, nulla dolores aperiam culpa minima fugit quae.
-            </p>
-            <button type="button" onClick={this.toggleModal}>
-              Закрыть модалку
-            </button>
+            <TodoEditor onAddTodo={this.addTodo} />
           </Modal>
-        )} */}
+        )}
 
         {/* <Counter initialValue={10} /> */}
 
@@ -151,8 +168,6 @@ class App extends Component {
           <p>Общее количество: {totalTodosCount}</p>
           <p>Количество выполненых: {completedTodosCount}</p>
         </div>
-
-        <TodoEditor onAddTodo={this.addTodo} />
 
         <TodoFilter value={filter} onFilterTodos={this.filterTodos} />
 
