@@ -11,7 +11,7 @@
 // https://youtu.be/w6MW1szKuT4?t=4129 - Рефакторинг заметок (вебинар № 5)
 // https://youtu.be/w6MW1szKuT4?t=4151 - (вынесение заметки в отдельный компонент)
 // https://youtu.be/w6MW1szKuT4?t=4446 - (добавление кнопки-иконки)
-// https://youtu.be/w6MW1szKuT4?t=4906 - ()
+// https://youtu.be/w6MW1szKuT4?t=4906 - (перенос редактора в модальное окно)
 
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
